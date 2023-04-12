@@ -1,62 +1,75 @@
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
+
 public class Main {
 
-	public static void main(String[] args) {
-		
-		var sc = new Scanner(System.in);
-		var rand = new Random();
-		
-		
-		String playermove;
-		
-		int playerscore = 0;
-		int computerscore = 0;
-		
-		while(true) {
-			
-			String rps[] = {"r", "p", "s"};
-			
-			int computer = rand.nextInt(rps.length);
-			
-			String computermove = rps[computer];
-			
-		while(true) {
-			
-			System.out.print("R|P|S: ");
-			playermove = sc.nextLine();
-			
-			if(playermove.equalsIgnoreCase("r") || playermove.equalsIgnoreCase("p") || playermove.equalsIgnoreCase("s")) {
-				break;
-			}
-			System.out.println("Invalid Move");
-			
-		}
-			System.out.println("Computer Move:" + computermove);
-			if(computermove.equalsIgnoreCase(playermove)) {
-				System.out.println("TIED");
-			}else if(computermove.equalsIgnoreCase("r") && playermove.equalsIgnoreCase("s")) {
-				System.out.println("Computer Win");
-				computerscore++;
-			}else if(computermove.equalsIgnoreCase("r") && playermove.equalsIgnoreCase("p")) {
-				System.out.println("Player Win");
-				playerscore++;
-			}else if(computermove.equalsIgnoreCase("p") && playermove.equalsIgnoreCase("r")) {
-				System.out.println("Computer Win");
-				computerscore++;
-			}else if(computermove.equalsIgnoreCase("p") && playermove.equalsIgnoreCase("s")) {
-				System.out.println("Player Win");
-				playerscore++;
-			}else if(computermove.equalsIgnoreCase("s") && playermove.equalsIgnoreCase("p")) {
-				System.out.println("Computer Win");
-				computerscore++;
-			}else if(computermove.equalsIgnoreCase("s") && playermove.equalsIgnoreCase("r")) {
-				System.out.println("Player Win");
-				playerscore++;
-			}
-			System.out.println("Player Score: " + playerscore);
-			System.out.println("Computer Score: " + computerscore);
-		}
-	}
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int playerScore = 0;
+        int computerScore = 0;
+        final String ROCK = "Rock";
+        final String PAPER = "Paper";
+        final String SCISSORS = "Scissors";
 
+        while (true) {
+            // Define the valid moves
+            String[] moves = {ROCK, PAPER, SCISSORS};
+            
+            // Generate a random move for the computer
+            int computerIndex = random.nextInt(moves.length);
+            String computerMove = moves[computerIndex];
+
+            // Get the user's move
+            String playerMoveStr;
+            String playerMove;
+
+            do {
+                System.out.print("Enter your move (R = Rock, P = Paper, S = Scissors): ");
+                playerMoveStr = scanner.nextLine().toLowerCase();
+                switch (playerMoveStr) {
+                    case "r":
+                        playerMove = ROCK;
+                        break;
+                    case "p":
+                        playerMove = PAPER;
+                        break;
+                    case "s":
+                        playerMove = SCISSORS;
+                        break;
+                    default:
+                        playerMove = "";
+                        break;
+                }
+            } while (playerMove.isEmpty());
+
+            // Print the moves and determine the winner
+            System.out.println("Computer's move: " + computerMove);
+            if (computerMove.equals(playerMove)) {
+                System.out.println("TIED");
+            } else if (computerMove.equals(ROCK) && playerMove.equals(SCISSORS)) {
+                System.out.println("Computer Wins!");
+                computerScore++;
+            } else if (computerMove.equals(ROCK) && playerMove.equals(PAPER)) {
+                System.out.println("Player Wins!");
+                playerScore++;
+            } else if (computerMove.equals(PAPER) && playerMove.equals(ROCK)) {
+                System.out.println("Computer Wins!");
+                computerScore++;
+            } else if (computerMove.equals(PAPER) && playerMove.equals(SCISSORS)) {
+                System.out.println("Player Wins!");
+                playerScore++;
+            } else if (computerMove.equals(SCISSORS) && playerMove.equals(PAPER)) {
+                System.out.println("Computer Wins!");
+                computerScore++;
+            } else if (computerMove.equals(SCISSORS) && playerMove.equals(ROCK)) {
+                System.out.println("Player Wins!");
+                playerScore++;
+            }
+
+            // Print the scores
+            System.out.println("Player Score: " + playerScore);
+            System.out.println("Computer Score: " + computerScore);
+        }
+    }
 }
