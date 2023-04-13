@@ -6,7 +6,7 @@ public class Main {
 		
 		var sc = new Scanner(System.in);
 		var rand = new Random();
-		
+		System.out.println("Welcome player");
 		
 		String playermove;
 		
